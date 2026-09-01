@@ -1,25 +1,61 @@
-// config/skills.ts
-
 export interface Skill {
-    name: string
-    level: number
-    color: string
-    icon: string
-  }
-  
-  export const skillsData: Skill[] = [
-    { name: "Java", level: 85, color: "#007396", icon: "FaJava" },
-    { name: "Spring Boot", level: 80, color: "#6DB33F", icon: "SiSpringboot" },
-    { name: "Angular", level: 78, color: "#DD0031", icon: "SiAngular" },
-    { name: "Flutter", level: 75, color: "#02569B", icon: "SiFlutter" },
-    { name: "Dart", level: 72, color: "#0175C2", icon: "SiDart" },
-    { name: "JavaScript", level: 82, color: "#F7DF1E", icon: "SiJavascript" },
-    { name: "Next.js", level: 55, color: "#000000", icon: "SiNextdotjs" },
-    { name: "React", level: 60, color: "#61DAFB", icon: "SiReact" },
-    { name: "TypeScript", level: 50, color: "#3178C6", icon: "SiTypescript" },
-    { name: "Node.js", level: 45, color: "#339933", icon: "SiNodedotjs" },
-    { name: "PostgreSQL", level: 65, color: "#4169E1", icon: "SiPostgresql" },
-    { name: "MongoDB", level: 60, color: "#47A248", icon: "SiMongodb" },
-    { name: "Git", level: 75, color: "#F05032", icon: "SiGit" },
-    { name: "C#", level: 65, color: "#239120", icon: "SiSharp" }
-  ]
+  name: string
+  level: number
+  category: 'core' | 'frontend' | 'mobile' | 'database' | 'tools'
+}
+
+export interface SkillGroup {
+  label: string
+  description: string
+  skills: Skill[]
+}
+
+export const skillGroups: SkillGroup[] = [
+  {
+    label: 'Core',
+    description: 'The languages and frameworks I build on every day',
+    skills: [
+      { name: 'Java', level: 85, category: 'core' },
+      { name: 'Spring Boot', level: 80, category: 'core' },
+      { name: 'JavaScript', level: 82, category: 'core' },
+    ],
+  },
+  {
+    label: 'Frontend',
+    description: 'Building responsive, accessible interfaces',
+    skills: [
+      { name: 'Angular', level: 78, category: 'frontend' },
+      { name: 'React', level: 60, category: 'frontend' },
+      { name: 'Next.js', level: 55, category: 'frontend' },
+      { name: 'TypeScript', level: 50, category: 'frontend' },
+    ],
+  },
+  {
+    label: 'Mobile',
+    description: 'Cross-platform applications',
+    skills: [
+      { name: 'Flutter', level: 75, category: 'mobile' },
+      { name: 'Dart', level: 72, category: 'mobile' },
+    ],
+  },
+  {
+    label: 'Data & Storage',
+    description: 'Designing and querying databases',
+    skills: [
+      { name: 'PostgreSQL', level: 65, category: 'database' },
+      { name: 'MySQL', level: 68, category: 'database' },
+      { name: 'MongoDB', level: 60, category: 'database' },
+    ],
+  },
+  {
+    label: 'Backend & Tools',
+    description: 'APIs, infrastructure, and workflows',
+    skills: [
+      { name: 'Node.js', level: 45, category: 'tools' },
+      { name: 'C#', level: 65, category: 'tools' },
+      { name: 'Git', level: 75, category: 'tools' },
+    ],
+  },
+]
+
+export const skillsData: Skill[] = skillGroups.flatMap((group) => group.skills)

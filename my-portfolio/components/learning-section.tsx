@@ -1,78 +1,85 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { BookOpen, Target, Rocket, Heart } from 'lucide-react'
 import { personalInfo } from '@/config'
+import { Reveal, SectionLabel } from './reveal'
+import { BookOpen, Target, Compass } from 'lucide-react'
 
 export function LearningSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-
-  const learningItems = [
-    {
-      icon: BookOpen,
-      title: "Currently Learning",
-      description: personalInfo.currentlyLearning.join(" • "),
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: Target,
-      title: "Next Goals",
-      description: personalInfo.nextGoals.join(" • "),
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      icon: Rocket,
-      title: "Looking For",
-      description: personalInfo.lookingFor,
-      color: "from-orange-500 to-red-500"
-    },
-    {
-      icon: Heart,
-      title: "Work Style",
-      description: personalInfo.workStyle,
-      color: "from-green-500 to-emerald-500"
-    }
-  ]
-
   return (
-    <section id="learning" className="relative py-20 px-4">
-      <div className="max-w-7xl mx-auto" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="text-primary font-semibold tracking-wide uppercase text-sm">Growth Mindset</span>
-          <h2 className="text-4xl sm:text-5xl font-bold mt-4 mb-6">
-            My Learning{' '}
-            <span className="gradient-text">Journey</span>
+    <section className="relative border-t border-border px-6 py-24">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <SectionLabel index="05">Growth</SectionLabel>
+          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+            Always in the process of <span className="gradient-text">becoming</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Always curious, always learning. Here's what I'm focused on right now.
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Engineering is a craft that rewards curiosity. I&apos;m steadily deepening my
+            skills in the areas that matter most for building large, dependable systems.
           </p>
-        </motion.div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {learningItems.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="rounded-2xl p-6 bg-card/30 backdrop-blur-sm border border-border hover:shadow-lg transition-all"
-            >
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-4`}>
-                <item.icon className="w-6 h-6 text-white" />
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          <Reveal delay={0.1}>
+            <div className="glass flex h-full flex-col rounded-2xl p-6">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-aurora-blue/15 text-aurora-blue">
+                <BookOpen size={18} />
               </div>
-              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {item.description}
+              <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                Currently learning
+              </h3>
+              <ul className="mt-4 space-y-3 flex-1">
+                {personalInfo.currentlyLearning.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-foreground">
+                    <span className="h-1 w-1 rounded-full bg-aurora-cyan" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <div className="glass flex h-full flex-col rounded-2xl p-6">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-aurora-violet/15 text-aurora-violet">
+                <Target size={18} />
+              </div>
+              <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                Next on the horizon
+              </h3>
+              <ul className="mt-4 space-y-3 flex-1">
+                {personalInfo.nextGoals.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-foreground">
+                    <span className="h-1 w-1 rounded-full bg-aurora-violet" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <div className="glass flex h-full flex-col rounded-2xl p-6">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-aurora-magenta/15 text-aurora-magenta">
+                <Compass size={18} />
+              </div>
+              <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                Looking for
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {personalInfo.lookingFor}
               </p>
-            </motion.div>
-          ))}
+              <p className="mt-4 font-mono text-xs text-muted-foreground">
+                Work style: {personalInfo.workStyle}
+              </p>
+              <div className="mt-auto pt-6">
+                <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1.5 text-xs text-emerald-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  {personalInfo.availability}
+                </span>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
