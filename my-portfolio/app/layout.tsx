@@ -91,22 +91,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
-      <body className="antialiased">
+      <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.add('light')}}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.add('light')}catch(e){}})()`,
           }}
         />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-background"
-        >
-          Skip to content
-        </a>
-        <ThemeProvider>
-          <div className="grain" aria-hidden="true" />
-          {children}
-        </ThemeProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -124,6 +114,18 @@ export default function RootLayout({
             }).replace(/</g, '\\u003c'),
           }}
         />
+      </head>
+      <body className="antialiased" suppressHydrationWarning>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-background"
+        >
+          Skip to content
+        </a>
+        <ThemeProvider>
+          <div className="grain" aria-hidden="true" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

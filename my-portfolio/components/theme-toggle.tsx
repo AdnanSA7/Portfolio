@@ -7,8 +7,8 @@ import { useReducedMotion } from '@/lib/use-reduced-motion'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
-  const isDark = theme === 'dark'
   const reduceMotion = useReducedMotion()
+  const isDark = theme === 'dark'
 
   return (
     <motion.button

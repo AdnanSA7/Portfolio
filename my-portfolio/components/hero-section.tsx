@@ -40,7 +40,7 @@ export function HeroSection() {
 
             <motion.h1
               {...fadeUp(0.1)}
-              className="text-balance text-5xl font-semibold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl"
+              className="text-balance text-[2.6rem] font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
             >
               {personalInfo.hero.greeting}{' '}
               <span className="gradient-text">{personalInfo.hero.name}</span>.
@@ -111,11 +111,11 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* Floating glass stat cards */}
+              {/* Floating glass stat cards — hidden on very small screens */}
               <motion.div
                 animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                className="glass-strong absolute -left-4 top-16 rounded-xl px-4 py-3 text-center"
+                className="glass-strong absolute -left-4 top-16 hidden rounded-xl px-4 py-3 text-center min-[480px]:block"
               >
                 <p className="font-mono text-2xl font-semibold text-foreground">
                   {personalInfo.yearsOfExperience}+
@@ -126,7 +126,7 @@ export function HeroSection() {
               <motion.div
                 animate={reduceMotion ? undefined : { y: [0, 10, 0] }}
                 transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-                className="glass-strong absolute -right-4 top-1/2 rounded-xl px-4 py-3 text-center"
+                className="glass-strong absolute -right-4 top-1/2 hidden rounded-xl px-4 py-3 text-center min-[480px]:block"
               >
                 <p className="font-mono text-2xl font-semibold text-foreground">
                   {personalInfo.projectsCompleted}
@@ -137,7 +137,7 @@ export function HeroSection() {
               <motion.div
                 animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
                 transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="glass-strong absolute bottom-10 -left-2 flex items-center gap-2 rounded-xl px-4 py-3"
+                className="glass-strong absolute bottom-10 -left-2 hidden items-center gap-2 rounded-xl px-4 py-3 min-[480px]:flex"
               >
                 <Sparkles size={16} className="text-aurora-violet" />
                 <div>
@@ -149,7 +149,7 @@ export function HeroSection() {
               <motion.div
                 animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
                 transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="glass-strong absolute -bottom-2 right-8 flex items-center gap-2 rounded-xl px-4 py-3"
+                className="glass-strong absolute -bottom-2 right-8 hidden items-center gap-2 rounded-xl px-4 py-3 min-[480px]:flex"
               >
                 <MapPin size={15} className="text-aurora-cyan" />
                 <span className="text-sm text-muted-foreground">{personalInfo.location}</span>
